@@ -1,6 +1,10 @@
 # Rabbit MQ with Golang
 
-This repository must only introduce the firsts steps with rabbit mq with Golang
+This repository must only introduce the firsts steps with rabbit mq with Golang.
+
+Requirements:
+ [x] - RabbitMQ
+ [x] - Golang
 
 
 ## What is RabbitMQ ?
@@ -14,16 +18,25 @@ RabbitMQ it is a open-source message delivery system that implements AMQP (Advan
 - Consumer
 - Exchange
 
+## What is Golang ?
+
+A programming language :nerd_face:
+
+
 ## Instaling RabbitMQ:
 
-First of all, install RabbitMQ in you OS. There is some ways to do it:
+First of all, install RabbitMQ in you OS, if you do not have it. There is some ways to do it:
 
 - Download RabbitMQ: https://www.rabbitmq.com/download.html
 - Docker: `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management`
+- Use Docker Compose (read the .yaml file)
 
-- Use Docker Compose (read the file)
 
+# How execute this project:
 
-## Install AMQP lib:
+- Instal amqp lib: go get github.com/streadway/amqp
+- Execute `docker compose up -d` (run rabbitMQ service)
+- Start the receiver at the folder `main`. Run: `go run receiver.go`
+- Run main.go and type a message: `go run main.go`
 
-- go get github.com/streadway/amqp
+This service will sent only one message per execution. Feel free do adjust as you want.
