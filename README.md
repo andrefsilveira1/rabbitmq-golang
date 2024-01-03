@@ -36,7 +36,7 @@ First of all, install RabbitMQ in you OS, if you do not have it. There is some w
 
 # How execute this project:
 
-- Instal amqp lib: go get github.com/streadway/amqp
+- Install amqp lib: go get github.com/streadway/amqp
 - Execute `docker compose up -d` (run rabbitMQ service)
 - Start the receiver at the folder `main`. Run: `go run receiver.go`
 - Run main.go and type a message: `go run main.go`
