@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"log"
+	"os"
 	"rabbitmq/utils"
 
 	"github.com/streadway/amqp"
@@ -26,8 +29,12 @@ func main() {
 	)
 
 	utils.HandleError(err, "Failed to create a queue")
-
-	body := "Hi, there!"
+	reader := bufio.NewReader(os.Stdin)
+	body, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println("Error reading input:", err)
+		return
+	}
 
 	err = channel.Publish(
 		"",         // Exchange
