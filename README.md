@@ -40,3 +40,8 @@ First of all, install RabbitMQ in you OS, if you do not have it. There is some w
 - Run main.go and type a message: `go run main.go`
 
 This service will sent only one message per execution. Feel free do adjust as you want.
+
+# Important:
+
+This example it's a little Chat Messenger demonstration. But, RabbitMQ is designed for reliability first, but not for real-time message communication.
+
