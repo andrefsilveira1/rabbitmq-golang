@@ -47,5 +47,5 @@ func main() {
 		})
 	utils.HandleError(err, "Failed to publish a message")
 
-	log.Printf(" [x] Sent %s", body)
+	log.Printf("> You sent: %s", body)
 }
