@@ -22,3 +22,8 @@ First of all, install RabbitMQ in you OS. There is some ways to do it:
 - Docker: `docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management`
 
 - Use Docker Compose (read the file)
+
+
+## Install AMQP lib:
+
+- go get github.com/streadway/amqp
