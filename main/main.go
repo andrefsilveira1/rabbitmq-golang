@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"rabbitmq/utils"
+	"strings"
 
 	"github.com/streadway/amqp"
 )
@@ -30,22 +31,29 @@ func main() {
 
 	utils.HandleError(err, "Failed to create a queue")
 	reader := bufio.NewReader(os.Stdin)
-	body, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Error reading input:", err)
-		return
+	for {
+		body, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading input:", err)
+			return
+		}
+		fmt.Println("Message:", body)
+		if strings.TrimRight(body, "\n") == "exit" {
+			fmt.Println("Finishing execution...")
+			return
+		}
+		err = channel.Publish(
+			"",         // Exchange
+			queue.Name, // Routing key
+			false,      // Mandatory
+			false,      // Immediate
+			amqp.Publishing{
+				ContentType: "text/plain",
+				Body:        []byte(body),
+			})
+		utils.HandleError(err, "Failed to publish a message")
+
+		log.Printf("> You sent: %s", body)
 	}
 
-	err = channel.Publish(
-		"",         // Exchange
-		queue.Name, // Routing key
-		false,      // Mandatory
-		false,      // Immediate
-		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        []byte(body),
-		})
-	utils.HandleError(err, "Failed to publish a message")
-
-	log.Printf("> You sent: %s", body)
 }
